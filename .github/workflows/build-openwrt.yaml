@@ -14,6 +14,13 @@ on:
   schedule:
     - cron: "38 1 */3 * *"
 
+# Serialize runs so a push/schedule/dispatch overlap can't race on the shared
+# actions/cache key (openwrt-<branch>). Queue rather than cancel: a long build
+# in progress finishes instead of being thrown away by a newer trigger.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   REMOTE_REPOSITORY: pesa1234/openwrt
   CONFIG_FILE: mt6000.config
