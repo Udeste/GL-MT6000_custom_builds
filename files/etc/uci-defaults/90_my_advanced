@@ -1,0 +1,23 @@
+#!/bin/sh
+
+exit 0
+
+# Ensure singleton sections exist
+uci -q get advanced.@defaults[0] >/dev/null 2>&1         || uci -q add advanced defaults
+uci -q get advanced.@edcca[0] >/dev/null 2>&1             || uci -q add advanced edcca
+uci -q get advanced.@advanced_packet_steering[0] >/dev/null 2>&1 || uci -q add advanced advanced_packet_steering
+
+uci -q batch << EOI
+set advanced.@defaults[0].usb_2='0'
+set advanced.@defaults[0].usb_power='0'
+set advanced.@defaults[0].atf_enable='1'
+set advanced.@defaults[0].hw_atf_enable='1'
+set advanced.@defaults[0].wed_offloading='1'
+
+set advanced.@advanced_packet_steering[0].advanced_packet_steering_enable='2'
+set advanced.@advanced_packet_steering[0].advanced_packet_steering_delay='30'
+
+commit advanced
+EOI
+
+exit 0

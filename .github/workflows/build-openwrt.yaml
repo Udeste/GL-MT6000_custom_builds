@@ -1,0 +1,226 @@
+name: Build OpenWrt for GL-MT6000
+
+permissions:
+  contents: write
+  actions: write
+  pages: write
+  id-token: write
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "38 1 */3 * *"
+
+env:
+  REMOTE_REPOSITORY: pesa1234/openwrt
+  CONFIG_FILE: mt6000.config
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  check_commits:
+    name: Check for new commits
+    runs-on: ubuntu-24.04-arm
+    outputs:
+      remote_branch: ${{ steps.check_commits.outputs.remote_branch }}
+      release_prefix: ${{ steps.check_commits.outputs.release_prefix }}
+      new_commits: ${{ steps.check_commits.outputs.new_commits }}
+      latest_commit_sha: ${{ steps.check_commits.outputs.latest_commit_sha }}
+    steps:
+      - name: Check for new commits in pesa1234 repo
+        id: check_commits
+        run: |
+          remote_branch=$(git ls-remote https://github.com/${{ env.REMOTE_REPOSITORY }}.git "refs/heads/next-*" | sed -e 's|\(.*heads/\)||' | grep -viE 'test|beta' | sort -V | tail -n1)
+          [ -n "$remote_branch" ] && latest_commit_sha=$(gh api "repos/${{ env.REMOTE_REPOSITORY }}/commits/${remote_branch}" --jq .sha)
+          [ -z "$latest_commit_sha" ] && { echo "*** COULD NOT GET latest_commit_sha FROM remote_branch=$remote_branch ***" ; exit 1; }
+          gh api "repos/${{ github.repository }}/releases/latest" --jq .body 2>/dev/null | grep -q "${latest_commit_sha}" && echo "new_commits=false" >> $GITHUB_OUTPUT || echo "new_commits=true" >> $GITHUB_OUTPUT
+          echo "remote_branch=${remote_branch}"
+          echo "release_prefix=${remote_branch%.rss*}"
+          echo "latest_commit_sha=$latest_commit_sha"
+          echo "remote_branch=${remote_branch}" >> $GITHUB_OUTPUT
+          echo "release_prefix=${remote_branch%.rss*}" >> $GITHUB_OUTPUT
+          echo "latest_commit_sha=$latest_commit_sha" >> $GITHUB_OUTPUT
+
+  build:
+    name: Build OpenWrt
+    needs: check_commits
+    if: github.event_name == 'workflow_dispatch' || needs.check_commits.outputs.new_commits == 'true'
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt remove -y '*cloud*' '*firefox*' '*chrome*' '*dotnet*' '*php*'
+          sudo apt update -y && sudo apt upgrade -y
+          sudo apt install -y build-essential clang flex bison g++ gawk gettext libncurses-dev libssl-dev python3-setuptools rsync swig unzip zlib1g-dev file wget llvm git
+          sudo apt autoremove -y && sudo apt clean -y
+
+      - name: Checkout remote repository
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ env.REMOTE_REPOSITORY }}
+          ref: ${{ needs.check_commits.outputs.remote_branch }}
+
+      - name: Checkout current repository
+        uses: actions/checkout@v6
+        with:
+          path: "builder_repo"
+
+      - name: Restore cache
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            dl/
+            staging_dir/
+            build_dir/host/llvm*/
+          key: openwrt-${{ needs.check_commits.outputs.remote_branch }}
+
+      - name: Fix cache timestamps
+        run: |
+          find build_dir/ staging_dir/ -name '.stamp_*' -o -name '.built' -o -name '.configured' | xargs touch 2>/dev/null || true
+          # find build_dir/ staging_dir/ -type f | xargs touch 2>/dev/null || true
+
+      - name: Remove old build output
+        run: rm -rf bin/*
+
+      - name: Update and install feeds
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          # run again because sometimes it misses some dependencies
+          ./scripts/feeds install -a
+
+      - name: Prepare signing keys
+        env:
+          APKSIGN_PRIVATE_KEY: ${{ secrets.APKSIGN_PRIVATE_KEY }}
+          APKSIGN_PUBLIC_CERT: ${{ secrets.APKSIGN_PUBLIC_CERT }}
+        run: |
+          echo "$APKSIGN_PRIVATE_KEY" > ./private-key.pem
+          echo "$APKSIGN_PUBLIC_CERT" > ./public-key.pem
+          chmod 600 ./private-key.pem
+
+      - name: Setup configuration and custom files
+        run: |
+          # delete unneeded folders
+          rm -frv builder_repo/.git builder_repo/.github
+          mv -v builder_repo/files ./
+          mv -v builder_repo/${{ env.CONFIG_FILE }} .config
+          rm -rfv builder_repo
+
+          make defconfig
+
+      - name: Check LLVM cache hit
+        run: |
+          echo "Cache hit: ${{ steps.cache-restore.outputs.cache-hit }}"
+          ls -la build_dir/host/ 2>/dev/null || echo "build_dir/host is empty"
+
+      - name: Build firmware (download)
+        run: |
+          make download -j$(nproc) || {
+            echo "Retrying..."
+            sleep 60
+            make download -j1 V=s
+          }
+
+      - name: Build firmware
+        run: |
+          make -j$(nproc) || {
+            echo "Retrying..."
+            sleep 60
+            make -j1 V=s
+          }
+
+      - name: Cleanup apk signing key
+        if: always()   # runs even if previous steps fail
+        run: rm -f ./private-key.pem ./public-key.pem
+
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            dl/
+            staging_dir/
+            build_dir/host/llvm*/
+          key: openwrt-${{ needs.check_commits.outputs.remote_branch }}
+
+      - name: Prepare gh-pages content
+        run: |
+          # Checkout existing gh-pages content, or start fresh if branch doesn't exist yet
+          git fetch origin gh-pages || true
+          mkdir -p gh-pages-content
+          git --work-tree=gh-pages-content checkout origin/gh-pages -- . 2>/dev/null || true
+
+          # Merge new build folder(s) from ./bin into the existing gh-pages content
+          cp -r ./bin/. gh-pages-content/
+
+          # Keep only the 10 most recent versioned build folders, prune the rest
+          ls -1d gh-pages-content/*/ 2>/dev/null | sort -V | head -n -10 | xargs -r rm -rf
+
+      - name: Publish apk Packages to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-pages-content
+          force_orphan: true  # squash gh-pages history each time to keep the branch lean
+
+      - name: Create release
+        run: |
+          RELEASE_DATE=$(date +%F)
+          PAGES_BASE="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+
+          # Resolve sysupgrade file from the current build folder (only one folder exists under bin per run)
+          BIN_FOLDER=$(ls -1d ./bin/*/ | head -1)
+          SYSUPGRADE_PATH=$(find "$BIN_FOLDER" -iname 'openwrt-*-sysupgrade.bin' | head -1 | sed 's|^\./bin/||')
+          SYSUPGRADE_URL="${PAGES_BASE}/${SYSUPGRADE_PATH}"
+
+          gh release delete "${{ needs.check_commits.outputs.release_prefix }}-${RELEASE_DATE}" --cleanup-tag -y --repo "${{ github.repository }}" ||:
+
+          NOTES=$(cat << EOF
+          ### 🔄 Main Repository
+          - **Repository:** [${{ env.REMOTE_REPOSITORY }}](https://github.com/${{ env.REMOTE_REPOSITORY }})
+          - **Branch:** ${{ needs.check_commits.outputs.remote_branch }}
+          - **Commit:** ${{ needs.check_commits.outputs.latest_commit_sha }}
+
+          ---
+
+          ## ⚠️ Heavily Customized Build — Read Before Flashing
+
+          This build is tailored for **MY** Flint 2 (GL-MT6000) and based on **MY PREFERENCES** and [pesa1234](https://github.com/pesa1234)'s [work](https://forum.openwrt.org/t/mt6000-custom-build-with-luci-and-some-optimization-kernel-6-12-x/185241).
+
+          ### 🔑 U-Boot Environment Variables Required
+          Several values are read from the **U-Boot environment** at boot time — if not set, flashing this image **will brick your router**. 🧱
+
+          ### 📖 Before You Proceed
+          Read the README for the required variables, how to set them and recovery options.
+
+          > **Do not use** these firmwares unless you have the exact same setup. **Fork and adapt instead.** 🚨
+
+          ---
+
+          ### 📝 Build Information
+          - **Target:** [Flint 2 (GL-MT6000)](https://openwrt.org/toh/gl.inet/gl-mt6000)
+          - **Configuration:** [${{ env.CONFIG_FILE }}](${{ env.CONFIG_FILE }})
+
+          ---
+
+          ### 📦 Downloads
+          - **Sysupgrade:** [${SYSUPGRADE_PATH##*/}](${SYSUPGRADE_URL})
+          - **All packages & files:** [GitHub Pages](${PAGES_BASE})
+          EOF
+          )
+
+          gh release create "${{ needs.check_commits.outputs.release_prefix }}-${RELEASE_DATE}" \
+            --repo "${{ github.repository }}" \
+            --latest \
+            --title "OpenWrt Custom Release for Flint 2 (${{ needs.check_commits.outputs.release_prefix }}-${RELEASE_DATE})" \
+            --notes "$NOTES"
+
+      - name: Clean up old releases
+        run: |
+          # keep only the 10 most recent releases
+          gh api repos/${{ github.repository }}/releases | jq -r '.[10:][] | "\(.id) \(.tag_name)"' | while read id tag; do
+            gh api -X DELETE "repos/${{ github.repository }}/releases/$id" && gh api -X DELETE "repos/${{ github.repository }}/git/refs/tags/$tag" 2>/dev/null ||:
+          done

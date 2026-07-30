@@ -1,0 +1,31 @@
+#!/bin/sh
+
+exit 0
+
+has_led() {
+    local sysfs="$1" i=0
+    while uci -q get "system.@led[$i]" >/dev/null 2>&1; do
+        [ "$(uci -q get "system.@led[$i].sysfs")" = "$sysfs" ] && return 0
+        i=$((i + 1))
+    done
+    return 1
+}
+
+# LED: blue:run — only if not already configured
+has_led 'blue:run' || {
+    uci -q add system led
+    uci -q set system.@led[-1].sysfs='blue:run'
+    uci -q set system.@led[-1].trigger='none'
+    uci -q set system.@led[-1].default='0'
+}
+
+# LED: white:system — only if not already configured
+has_led 'white:system' || {
+    uci -q add system led
+    uci -q set system.@led[-1].sysfs='white:system'
+    uci -q set system.@led[-1].trigger='heartbeat'
+}
+
+uci commit system
+
+exit 0

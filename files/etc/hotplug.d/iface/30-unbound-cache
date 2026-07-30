@@ -1,0 +1,42 @@
+#!/bin/sh
+
+case "$INTERFACE" in
+    wan|wan6) ;;
+    *) exit 0 ;;
+esac
+
+CACHE_FILE="/tmp/unbound_cache.dump"
+LOCK_FILE="/tmp/unbound_cache.lock"
+LOG_TAG="unbound-cache"
+
+case "$ACTION" in
+    ifdown)
+        logger -t "$LOG_TAG" "$INTERFACE went down"
+        if [ ! -f "$LOCK_FILE" ]; then
+            touch "$LOCK_FILE"
+            if unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null; then
+                ENTRIES=$(wc -l < "$CACHE_FILE")
+                logger -t "$LOG_TAG" "Cache dumped to $CACHE_FILE ($ENTRIES lines)"
+            else
+                logger -t "$LOG_TAG" "ERROR: Failed to dump cache"
+            fi
+        else
+            logger -t "$LOG_TAG" "$INTERFACE went down but cache already dumped (lock exists), skipping"
+        fi
+        ;;
+    ifup)
+        logger -t "$LOG_TAG" "$INTERFACE came up"
+        rm -f "$LOCK_FILE"
+        sleep 3
+        if [ -f "$CACHE_FILE" ]; then
+            if unbound-control load_cache < "$CACHE_FILE" 2>/dev/null; then
+                ENTRIES=$(wc -l < "$CACHE_FILE")
+                logger -t "$LOG_TAG" "Cache loaded from $CACHE_FILE ($ENTRIES lines)"
+            else
+                logger -t "$LOG_TAG" "ERROR: Failed to load cache"
+            fi
+        else
+            logger -t "$LOG_TAG" "No cache file found at $CACHE_FILE, skipping load"
+        fi
+        ;;
+esac

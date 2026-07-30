@@ -1,0 +1,28 @@
+#!/bin/sh
+
+exit 0
+
+uci -q batch <<-EOI
+
+set luci_statistics.collectd_contextswitch.enable='1'
+
+set luci_statistics.collectd_interface.enable='1'
+delete luci_statistics.collectd_interface.Interfaces
+add_list luci_statistics.collectd_interface.Interfaces='br-lan'
+add_list luci_statistics.collectd_interface.Interfaces='eth0'
+add_list luci_statistics.collectd_interface.Interfaces='lan1'
+add_list luci_statistics.collectd_interface.Interfaces='lan2'
+add_list luci_statistics.collectd_interface.Interfaces='lan3'
+add_list luci_statistics.collectd_interface.Interfaces='lo'
+set luci_statistics.collectd_interface.IgnoreSelected='1'
+
+set luci_statistics.collectd_thermal.enable='1'
+delete luci_statistics.collectd_thermal.IgnoreSelected
+delete luci_statistics.collectd_thermal.Device
+
+commit luci_statistics
+
+EOI
+
+exit 0
+

@@ -1,0 +1,14 @@
+. /lib/functions/uci-defaults.sh
+
+fw_loadenv
+
+board_config_update
+
+[ -f /var/run/uboot-env/root_password_hash ] && ucidef_set_root_password_hash "$(cat /var/run/uboot-env/root_password_hash)"
+[ -f /var/run/uboot-env/timezone ] && ucidef_set_timezone "$(cat /var/run/uboot-env/timezone)"
+
+ucidef_set_hostname "GL-MT6000"
+
+board_config_flush
+
+exit 0

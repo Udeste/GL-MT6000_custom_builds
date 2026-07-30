@@ -1,0 +1,62 @@
+#!/bin/sh
+
+[ -e /etc/config/ddns ] || touch /etc/config/ddns
+
+# Read DDNS credentials from U-Boot env, fall back to defaults
+DDNS_LOOKUP_HOST=$(fw_printenv -n ddns_cf_lookup_host 2>/dev/null)
+DDNS_DOMAIN=$(fw_printenv -n ddns_cf_domain 2>/dev/null)
+DDNS_PASSWORD=$(fw_printenv -n ddns_cf_password 2>/dev/null)
+
+#Set defaults if any of the values are missing.
+DDNS_LOOKUP_HOST=${DDNS_LOOKUP_HOST:-"missing-value-in-uboot.example.com"}
+DDNS_DOMAIN=${DDNS_DOMAIN:-"missing-value-in-uboot@example.com"}
+DDNS_PASSWORD=${DDNS_PASSWORD:-"changeme123"}
+
+uci -q batch << EOI
+set ddns.global='ddns'
+set ddns.global.ddns_dateformat='%F %R'
+set ddns.global.ddns_loglines='250'
+set ddns.global.upd_privateip='0'
+
+# Delete default ddns entries
+delete ddns.myddns_ipv4
+delete ddns.myddns_ipv6
+delete ddns.Cloudflare
+delete ddns.Cloudflare_v6
+
+set ddns.Cloudflare='service'
+set ddns.Cloudflare.service_name='cloudflare.com-v4'
+set ddns.Cloudflare.use_ipv6='0'
+set ddns.Cloudflare.enabled='1'
+set ddns.Cloudflare.lookup_host='$DDNS_LOOKUP_HOST'
+set ddns.Cloudflare.domain='$DDNS_DOMAIN'
+set ddns.Cloudflare.username='Bearer'
+set ddns.Cloudflare.password='$DDNS_PASSWORD'
+set ddns.Cloudflare.use_https='1'
+set ddns.Cloudflare.ip_source='web'
+set ddns.Cloudflare.ip_url='http://checkip.dyndns.com'
+set ddns.Cloudflare.interface='wan'
+set ddns.Cloudflare.use_syslog='2'
+set ddns.Cloudflare.check_interval='1'
+set ddns.Cloudflare.check_unit='hours'
+
+set ddns.Cloudflare_v6='service'
+set ddns.Cloudflare_v6.service_name='cloudflare.com-v4'
+set ddns.Cloudflare_v6.use_ipv6='1'
+set ddns.Cloudflare_v6.enabled='1'
+set ddns.Cloudflare_v6.lookup_host='$DDNS_LOOKUP_HOST'
+set ddns.Cloudflare_v6.domain='$DDNS_DOMAIN'
+set ddns.Cloudflare_v6.username='Bearer'
+set ddns.Cloudflare_v6.password='$DDNS_PASSWORD'
+set ddns.Cloudflare_v6.use_https='1'
+set ddns.Cloudflare_v6.ip_source='web'
+set ddns.Cloudflare_v6.ip_url='http://checkipv6.dyndns.com'
+set ddns.Cloudflare_v6.interface='wan6'
+set ddns.Cloudflare_v6.use_syslog='2'
+set ddns.Cloudflare_v6.check_interval='1'
+set ddns.Cloudflare_v6.check_unit='hours'
+
+commit ddns
+EOI
+
+exit 0

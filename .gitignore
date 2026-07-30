@@ -1,0 +1,3 @@
+# Dropbear SSH host keys — private keys, must never be committed
+/files/etc/dropbear/dropbear_ed25519_host_key
+/files/etc/dropbear/dropbear_rsa_host_key

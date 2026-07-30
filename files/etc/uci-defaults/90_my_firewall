@@ -1,0 +1,61 @@
+#!/bin/sh
+exit 0
+
+# Check if a forwarding rule with given src→dest already exists
+has_forwarding() {
+    local src="$1" dest="$2" i=0
+    while uci -q get "firewall.@forwarding[$i]" >/dev/null 2>&1; do
+        local s d
+        s=$(uci -q get "firewall.@forwarding[$i].src")
+        d=$(uci -q get "firewall.@forwarding[$i].dest")
+        [ "$s" = "$src" ] && [ "$d" = "$dest" ] && return 0
+        i=$((i + 1))
+    done
+    return 1
+}
+
+# set flow offloading
+uci -q set firewall.@defaults[0].flow_offloading='1'
+uci -q set firewall.@defaults[0].flow_offloading_hw='1'
+
+# WAN zone hardening — only if not already set
+uci -q set firewall.@zone[1].input='DROP'
+uci -q set firewall.@zone[1].forward='DROP'
+uci -q set firewall.@zone[1].masq6='1'
+
+# WireGuard inbound rule — only if no rule named 'Wireguard' exists
+if ! uci -q show firewall | grep -q "\.name='Wireguard'"; then
+    uci -q add firewall rule
+    uci -q set firewall.@rule[-1].name='Wireguard'
+    uci -q set firewall.@rule[-1].src='wan'
+    uci -q add_list firewall.@rule[-1].proto='udp'
+    uci -q set firewall.@rule[-1].dest_port='51545'
+    uci -q set firewall.@rule[-1].target='ACCEPT'
+fi
+
+# WireGuard zone — only if no zone named 'wg' exists
+if ! uci -q show firewall | grep -q "\.name='wg'"; then
+    uci -q add firewall zone
+    uci -q set firewall.@zone[-1].name='wg'
+    uci -q set firewall.@zone[-1].input='ACCEPT'
+    uci -q set firewall.@zone[-1].output='ACCEPT'
+    uci -q set firewall.@zone[-1].forward='ACCEPT'
+    uci -q add_list firewall.@zone[-1].network='wg0'
+fi
+
+# Forwardings — only if the src→dest pair doesn't already exist
+has_forwarding lan wg || {
+    uci -q add firewall forwarding
+    uci -q set firewall.@forwarding[-1].src='lan'
+    uci -q set firewall.@forwarding[-1].dest='wg'
+}
+
+has_forwarding wg lan || {
+    uci -q add firewall forwarding
+    uci -q set firewall.@forwarding[-1].src='wg'
+    uci -q set firewall.@forwarding[-1].dest='lan'
+}
+
+uci commit firewall
+
+exit 0

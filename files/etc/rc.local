@@ -1,0 +1,12 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+# Wait for interfaces to come up
+#sleep 15
+
+#/etc/scripts/aql_tuning.sh
+# /etc/scripts/manual_interrupts.sh
+# /etc/scripts/airtime_fairness.sh
+
+exit 0
+

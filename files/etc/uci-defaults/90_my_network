@@ -1,0 +1,39 @@
+#!/bin/sh
+
+exit 0
+
+DHCP_DEFAULT_DUID=$(fw_printenv -n dhcp_default_duid 2>/dev/null)
+
+# Set defaults if the value is missing
+DHCP_DEFAULT_DUID=${DHCP_DEFAULT_DUID:-"000000000000000000000000000000000000"}
+
+uci -q batch << EOI
+
+set network.globals.ula_prefix='fd08::/48'
+set network.globals.packet_steering='0'
+set network.globals.dhcp_default_duid='$DHCP_DEFAULT_DUID'
+
+set network.lan.ipaddr='192.168.8.1'
+set network.lan.netmask='255.255.255.0'
+set network.lan.multipath='off'
+
+set network.wan.hostname='*'
+set network.wan.peerdns="0"
+del network.wan.dns
+add_list network.wan.dns='1.1.1.2'
+add_list network.wan.dns='1.0.0.2'
+set network.wan.multipath='off'
+
+set network.wan6.peerdns="0"
+del network.wan6.dns
+add_list network.wan6.dns='2606:4700:4700::1112'
+add_list network.wan6.dns='2606:4700:4700::1002'
+set network.wan6.multipath='off'
+set network.wan6.reqaddress='try'
+set network.wan6.reqprefix='auto'
+set network.wan6.norelease='1'
+
+commit network
+EOI
+
+exit 0

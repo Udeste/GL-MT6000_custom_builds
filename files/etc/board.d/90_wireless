@@ -1,0 +1,20 @@
+. /lib/functions/uci-defaults.sh
+
+# Read WiFi credentials from U-Boot env, fall back to defaults
+WIFI_SSID=$(fw_printenv -n wifi_ssid 2>/dev/null)
+WIFI_KEY=$(fw_printenv -n wifi_key 2>/dev/null)
+WIFI_COUNTRY=$(fw_printenv -n wifi_country 2>/dev/null)
+
+# Set defaults if any of the values are missing
+WIFI_SSID=${WIFI_SSID:-"GL-MT6000"}
+WIFI_KEY=${WIFI_KEY:-"changeme123"}
+WIFI_COUNTRY=${WIFI_COUNTRY:-"NL"}
+
+board_config_update
+
+ucidef_set_wireless all "$WIFI_SSID" sae "$WIFI_KEY"
+ucidef_set_country "$WIFI_COUNTRY"
+
+board_config_flush
+
+exit 0

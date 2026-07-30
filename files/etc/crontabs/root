@@ -1,0 +1,8 @@
+0 23 * * * /etc/scripts/wifi_off.sh
+
+0 7  * * * /etc/scripts/wifi_on.sh
+
+0 8 * * * /etc/scripts/best_wifi_channels.sh 2>&1 | logger -t best_channel
+
+0 0 * * * /etc/init.d/acme renew
+

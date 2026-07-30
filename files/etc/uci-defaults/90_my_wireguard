@@ -1,0 +1,91 @@
+#!/bin/sh
+
+exit 0
+
+uci -q get network.wg0 >/dev/null 2>&1 && exit 0
+
+WG0_PRIV_KEY=$(fw_printenv -n wg0_priv_key 2>/dev/null)
+WG0_PEER1_PRIV_KEY=$(fw_printenv -n wg0_peer1_priv_key 2>/dev/null)
+WG0_PEER1_PUB_KEY=$(fw_printenv -n wg0_peer1_pub_key 2>/dev/null)
+WG0_PEER2_PRIV_KEY=$(fw_printenv -n wg0_peer2_priv_key 2>/dev/null)
+WG0_PEER2_PUB_KEY=$(fw_printenv -n wg0_peer2_pub_key 2>/dev/null)
+WG0_PEER3_PRIV_KEY=$(fw_printenv -n wg0_peer3_priv_key 2>/dev/null)
+WG0_PEER3_PUB_KEY=$(fw_printenv -n wg0_peer3_pub_key 2>/dev/null)
+WG0_PEER4_PRIV_KEY=$(fw_printenv -n wg0_peer4_priv_key 2>/dev/null)
+WG0_PEER4_PUB_KEY=$(fw_printenv -n wg0_peer4_pub_key 2>/dev/null)
+WG0_PEER5_PRIV_KEY=$(fw_printenv -n wg0_peer5_priv_key 2>/dev/null)
+WG0_PEER5_PUB_KEY=$(fw_printenv -n wg0_peer5_pub_key 2>/dev/null)
+WG0_PEER6_PRIV_KEY=$(fw_printenv -n wg0_peer6_priv_key 2>/dev/null)
+WG0_PEER6_PUB_KEY=$(fw_printenv -n wg0_peer6_pub_key 2>/dev/null)
+
+# Set defaults if any of the values are missing
+WG0_PRIV_KEY=${WG0_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER1_PRIV_KEY=${WG0_PEER1_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER1_PUB_KEY=${WG0_PEER1_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER2_PRIV_KEY=${WG0_PEER2_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER2_PUB_KEY=${WG0_PEER2_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER3_PRIV_KEY=${WG0_PEER3_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER3_PUB_KEY=${WG0_PEER3_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER4_PRIV_KEY=${WG0_PEER4_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER4_PUB_KEY=${WG0_PEER4_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER5_PRIV_KEY=${WG0_PEER5_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER5_PUB_KEY=${WG0_PEER5_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER6_PRIV_KEY=${WG0_PEER6_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER6_PUB_KEY=${WG0_PEER6_PUB_KEY:-"missing-value-in-uboot"}
+
+uci -q batch << EOI
+
+set network.wg0=interface
+set network.wg0.proto='wireguard'
+set network.wg0.private_key='$WG0_PRIV_KEY'
+set network.wg0.listen_port='51545'
+set network.wg0.multipath='off'
+add_list network.wg0.addresses='172.16.0.1/24'
+add_list network.wg0.addresses='fd99::1/120'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='Pixel'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER1_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER1_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.60/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::60/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='Lenovo'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER2_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER2_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.70/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::70/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='OP'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER3_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER3_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.80/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::80/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='ROG'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER4_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER4_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.90/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::90/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='MF286D'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER5_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER5_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.105/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::105/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='WD3600'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER6_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER6_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.110/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::110/128'
+
+commit network
+EOI
+
+exit 0
