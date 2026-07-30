@@ -9,6 +9,9 @@
 ## Repository Structure
 
 - [`mt6000.config`](mt6000.config) — OpenWrt build configuration (`.config`)
+- [`build.sh`](build.sh) — Local build script (feeds → defconfig → download → make); runs inside the container from `shell.nix`
+- [`shell.nix`](shell.nix) — `nix-shell` environment that provides `podman` and helper functions to build inside a Debian container (see [Building](#building))
+- [`.github/workflows/build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) — GitHub Actions CI that reproduces the local build on `ubuntu-24.04-arm` and publishes to Releases + Pages
 - [`download_qosmate.sh`](download_qosmate.sh) — Build-host helper that fetches [QoSmate](https://github.com/hudra0/qosmate) (SQM/CAKE) and, optionally, its LuCI app into `files/` so they are baked into the image
 - [`files/`](files/) — Custom files overlaid on the root filesystem at build time
   - [`files/etc/uci-defaults/`](files/etc/uci-defaults/) — First-boot scripts that configure the router via UCI (see note below)
@@ -47,6 +50,39 @@
 - `attendedsysupgrade` (built as module only)
 
 **Compiler options:** `cortex-a53+crc+crypto`, LTO, MOLD linker, OpenSSL speed optimizations.
+
+## Building
+
+This repo holds only the config and overlay (`mt6000.config` + `files/`). The build itself runs against a checkout of [pesa1234/openwrt](https://github.com/pesa1234/openwrt), with this repo's files overlaid on top.
+
+### CI (GitHub Actions)
+
+[`build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) runs on push, on a schedule, and manually. It detects the newest `next-*` branch upstream, checks out both repos, overlays `files/` and `mt6000.config` → `.config`, then builds on `ubuntu-24.04-arm` and publishes the firmware to GitHub Releases + Pages.
+
+### Local (nix-shell + podman)
+
+The host is NixOS, so the build can't run natively (non-FHS userland, and OpenWrt refuses to build as root). [`shell.nix`](shell.nix) works around this by giving `nix-shell` `podman`, which runs the build inside a `debian:bookworm-slim` container as the host user — the same non-root, FHS environment the CI uses.
+
+Setup is fully automated by [`build.sh`](build.sh) — no manual cloning or copying. From this repo:
+
+```sh
+nix-shell           # enters env with podman + openwrt-* helpers
+openwrt-start       # first run only: create the Debian container + install build deps
+openwrt-build       # runs build.sh in the container
+```
+
+`build.sh` (running in the container) mirrors the CI: it detects the newest upstream `next-*` branch, clones/updates the OpenWrt tree, overlays `files/` and `mt6000.config` → `.config`, then runs feeds → `defconfig` → `download` → `make`.
+
+The container mounts **this repo at `/builder`** and the **OpenWrt tree at `/openwrt`**. The tree lives *outside* this repo — by default a sibling `../openwrt` — so build artifacts (10 GB+) never land in the repo. Firmware ends up in `../openwrt/bin/targets/mediatek/filogic/`. Because the tree persists, rebuilds are incremental: just `nix-shell` → `openwrt-build`.
+
+Overrides (env vars, read by both `shell.nix` and `build.sh`):
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OPENWRT_DIR` | `../openwrt` | Where to check out / build the OpenWrt tree |
+| `OPENWRT_BRANCH` | newest `next-*` | Pin a specific upstream branch |
+
+Other helpers: `openwrt-shell` (interactive container shell), `openwrt-menuconfig`, `openwrt-status`, `openwrt-stop`, `openwrt-clean` (remove container).
 
 ## Scripts
 
