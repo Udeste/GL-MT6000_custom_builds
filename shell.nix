@@ -57,7 +57,7 @@ pkgs.mkShell {
           apt-get install -y --no-install-recommends \
             build-essential clang flex bison g++ gawk \
             gcc-multilib gettext git libncurses5-dev \
-            libssl-dev python3-distutils rsync unzip \
+            libssl-dev openssl python3-distutils rsync unzip \
             zlib1g-dev file wget curl ca-certificates \
             libelf-dev swig time patch python3-setuptools \
             llvm linux-libc-dev

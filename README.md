@@ -81,6 +81,7 @@ Overrides (env vars, read by both `shell.nix` and `build.sh`):
 |---|---|---|
 | `OPENWRT_DIR` | `../openwrt` | Where to check out / build the OpenWrt tree |
 | `OPENWRT_BRANCH` | newest `next-*` | Pin a specific upstream branch |
+| `APKSIGN_PRIVATE_KEY_FILE` | _(auto-generated)_ | Use a specific EC key to sign the package feed (e.g. the CI's key) instead of generating a persistent local one |
 
 Other helpers: `openwrt-shell` (interactive container shell), `openwrt-menuconfig`, `openwrt-status`, `openwrt-stop`, `openwrt-clean` (remove container).
 

@@ -10,6 +10,8 @@
 #   OPENWRT_DIR         where the OpenWrt tree lives (default: ../openwrt)
 #   REMOTE_REPOSITORY   upstream git URL (default: pesa1234/openwrt)
 #   OPENWRT_BRANCH      pin a branch (default: newest non-test/beta next-* branch)
+#   APKSIGN_PRIVATE_KEY_FILE  use this EC private key instead of generating one
+#                             (e.g. the same key the CI holds in secrets)
 set -e
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
@@ -46,6 +48,24 @@ cp -a "$BUILDER_DIR/files/." "$OPENWRT_DIR/files/"
 cp "$BUILDER_DIR/mt6000.config" "$OPENWRT_DIR/.config"
 
 cd "$OPENWRT_DIR"
+
+# 4. APK signing keys (rules.mk: BUILD_KEY_APK_SEC/PUB = $(TOPDIR)/{private,public}-key.pem).
+# SIGNED_PACKAGES/SIGN_EACH_PACKAGE default to y, so the build signs the package feed.
+# If the keys are missing OpenWrt auto-generates *ephemeral* ones — meaning every fresh
+# tree signs with a different key and the router stops trusting the feed. Create a
+# persistent pair once (or reuse a supplied key) so rebuilds keep the same signature.
+# Mirrors the CI's "Prepare signing keys" step, which injects a fixed key from secrets.
+if [ ! -f private-key.pem ]; then
+    if [ -n "$APKSIGN_PRIVATE_KEY_FILE" ]; then
+        echo ">>> Installing supplied APK signing key from $APKSIGN_PRIVATE_KEY_FILE ..."
+        cp "$APKSIGN_PRIVATE_KEY_FILE" private-key.pem
+    else
+        echo ">>> Generating APK signing key (private-key.pem) ..."
+        openssl ecparam -name prime256v1 -genkey -noout -out private-key.pem
+    fi
+    openssl ec -in private-key.pem -pubout > public-key.pem
+    chmod 600 private-key.pem
+fi
 
 echo ">>> Removing old bins"
 rm -fr bin/*
