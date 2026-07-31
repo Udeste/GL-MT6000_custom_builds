@@ -7,7 +7,7 @@
 #
 # Overridable via env:
 #   BUILDER_DIR         this repo (default: the script's own directory)
-#   OPENWRT_DIR         where the OpenWrt tree lives (default: ../openwrt)
+#   OPENWRT_DIR         where the OpenWrt tree lives (default: ./openwrt)
 #   REMOTE_REPOSITORY   upstream git URL (default: pesa1234/openwrt)
 #   OPENWRT_BRANCH      pin a branch (default: newest non-test/beta next-* branch)
 #   APKSIGN_PRIVATE_KEY_FILE  use this EC private key instead of generating one
@@ -16,7 +16,7 @@ set -e
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 BUILDER_DIR=${BUILDER_DIR:-$SCRIPT_DIR}
-OPENWRT_DIR=${OPENWRT_DIR:-$BUILDER_DIR/../openwrt}
+OPENWRT_DIR=${OPENWRT_DIR:-$BUILDER_DIR/openwrt}
 REMOTE_REPOSITORY=${REMOTE_REPOSITORY:-https://github.com/pesa1234/openwrt.git}
 JOBS=$(nproc)
 

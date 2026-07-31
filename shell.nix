@@ -21,9 +21,9 @@ pkgs.mkShell {
 
     # ── Paths ───────────────────────────────────────────────────────
     # BUILDER_DIR = questo repo (config + overlay). OPENWRT_DIR = albero
-    # OpenWrt esterno (default: cartella sorella ../openwrt), sovrascrivibile.
+    # OpenWrt (default: ./openwrt dentro il repo, git-ignored), sovrascrivibile.
     export BUILDER_DIR="$PWD"
-    export OPENWRT_DIR="''${OPENWRT_DIR:-$(dirname "$PWD")/openwrt}"
+    export OPENWRT_DIR="''${OPENWRT_DIR:-$PWD/openwrt}"
     mkdir -p "$OPENWRT_DIR"
     OPENWRT_DIR="$(cd "$OPENWRT_DIR" && pwd)"   # normalizza a path assoluto
 
