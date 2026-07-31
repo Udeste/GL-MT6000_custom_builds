@@ -83,12 +83,17 @@ jobs:
             staging_dir/
             build_dir/host/llvm*/
             .ccache/
-          key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}
-          # Warm-start a brand-new next-* branch from the newest previous branch's
-          # cache so a fresh branch isn't a fully cold (>6h) build. Newer OpenWrt
-          # keeps ccache under staging_dir (already cached); .ccache/ covers the
-          # older TOPDIR location too.
+          # Unique per-run key: actions/cache is immutable, so a stable key would
+          # freeze a branch's cache at its first run (save is skipped ever after).
+          # A fresh key every run means Save always writes; restore-keys falls back
+          # newest-first — same branch first, then any branch to warm-start a new
+          # next-* branch instead of a cold (>6h) build. This lets dl/ + ccache
+          # accumulate and makes timeout-resume actually persist progress.
+          # Newer OpenWrt keeps ccache under staging_dir (already cached); .ccache/
+          # covers the older TOPDIR location too.
+          key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}-${{ github.run_id }}
           restore-keys: |
+            openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}-
             openwrt-${{ runner.arch }}-
 
       - name: Fix cache timestamps
@@ -162,7 +167,7 @@ jobs:
             staging_dir/
             build_dir/host/llvm*/
             .ccache/
-          key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}
+          key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}-${{ github.run_id }}
 
       - name: Prepare gh-pages content
         run: |
