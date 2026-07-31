@@ -15,7 +15,7 @@ pkgs.mkShell {
   shellHook = ''
     echo ""
     echo "╔══════════════════════════════════════════════════════╗"
-    echo "║        OpenWrt Build Environment — Podman + Debian       ║"
+    echo "║    OpenWrt Build Environment — Podman + Debian       ║"
     echo "╚══════════════════════════════════════════════════════╝"
     echo ""
 
