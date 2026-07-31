@@ -82,7 +82,14 @@ jobs:
             dl/
             staging_dir/
             build_dir/host/llvm*/
+            .ccache/
           key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}
+          # Warm-start a brand-new next-* branch from the newest previous branch's
+          # cache so a fresh branch isn't a fully cold (>6h) build. Newer OpenWrt
+          # keeps ccache under staging_dir (already cached); .ccache/ covers the
+          # older TOPDIR location too.
+          restore-keys: |
+            openwrt-${{ runner.arch }}-
 
       - name: Fix cache timestamps
         run: |
@@ -132,6 +139,9 @@ jobs:
           }
 
       - name: Build firmware
+        # Die gracefully before the 6h job limit so the "Save cache" step below
+        # still runs and persists progress for the next run to resume from.
+        timeout-minutes: 320
         run: |
           make -j$(nproc) || {
             echo "Retrying..."
@@ -151,6 +161,7 @@ jobs:
             dl/
             staging_dir/
             build_dir/host/llvm*/
+            .ccache/
           key: openwrt-${{ runner.arch }}-${{ needs.check_commits.outputs.remote_branch }}
 
       - name: Prepare gh-pages content
