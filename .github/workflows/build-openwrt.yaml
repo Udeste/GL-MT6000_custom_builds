@@ -171,10 +171,12 @@ jobs:
 
       - name: Prepare gh-pages content
         run: |
-          # Checkout existing gh-pages content, or start fresh if branch doesn't exist yet
-          git fetch origin gh-pages || true
+          # Checkout existing gh-pages content, or start fresh if branch doesn't exist yet.
+          # cwd is the pesa1234/openwrt checkout, so `origin` is the wrong repo —
+          # fetch gh-pages explicitly from this builder repo instead.
+          git fetch "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" gh-pages:refs/remotes/builder/gh-pages || true
           mkdir -p gh-pages-content
-          git --work-tree=gh-pages-content checkout origin/gh-pages -- . 2>/dev/null || true
+          git --work-tree=gh-pages-content checkout builder/gh-pages -- . 2>/dev/null || true
 
           # Merge new build folder(s) from ./bin into the existing gh-pages content
           cp -r ./bin/. gh-pages-content/
@@ -188,6 +190,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./gh-pages-content
           force_orphan: true  # squash gh-pages history each time to keep the branch lean
+          # Re-add the custom-domain CNAME on every publish (force_orphan would
+          # otherwise drop it and detach the domain). .nojekyll is added by the
+          # action itself (enable_jekyll defaults to false).
+          cname: gl-mt6000.udeste.net
 
       - name: Create release
         run: |
