@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Append unbound private-domain and local-data records to unbound_srv.conf,
+# read from U-Boot env. unbound_private_domain holds the private domain; each
+# unbound_localN (N = 0..15) holds "<fqdn> <ipv4> [<ipv6>]" — the IPv6 record
+# is emitted only when the third field is present.
+
+SRV_CONF="/etc/unbound/unbound_srv.conf"
+
+# Skip if already populated
+grep -qE "^(private-domain|local-data):" "$SRV_CONF" 2>/dev/null && exit 0
+
+PRIVATE_DOMAIN=$(fw_printenv -n unbound_private_domain 2>/dev/null)
+[ -n "$PRIVATE_DOMAIN" ] && printf 'private-domain: "%s"\n' "$PRIVATE_DOMAIN" >> "$SRV_CONF"
+
+i=0
+while [ "$i" -le 15 ]; do
+    entry=$(fw_printenv -n "unbound_local${i}" 2>/dev/null)
+    if [ -n "$entry" ]; then
+        set -- $entry
+        name="$1" ipv4="$2" ipv6="$3"
+        if [ -n "$name" ] && [ -n "$ipv4" ]; then
+            printf 'local-data: "%s A %s"\n' "$name" "$ipv4" >> "$SRV_CONF"
+            [ -n "$ipv6" ] && printf 'local-data: "%s AAAA %s"\n' "$name" "$ipv6" >> "$SRV_CONF"
+        fi
+    fi
+    i=$((i + 1))
+done
+
+exit 0

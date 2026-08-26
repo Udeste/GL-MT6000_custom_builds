@@ -17,6 +17,7 @@
   - [`files/etc/scripts/`](files/etc/scripts/) — Runtime tuning and WiFi automation scripts (see [Scripts](#scripts))
   - [`files/etc/crontabs/root`](files/etc/crontabs/root) — Scheduled jobs (see [Cron jobs](#cron-jobs))
   - [`files/etc/hotplug.d/iface/30-unbound-cache`](files/etc/hotplug.d/iface/30-unbound-cache) — Dumps/restores the unbound DNS cache across WAN up/down events
+  - [`files/etc/unbound/unbound_srv.conf`](files/etc/unbound/unbound_srv.conf) — Raw unbound `server:` options included by the UCI integration (cache/slab tuning); `local-data` records are appended at first boot from U-Boot env by `91_my_unbound_localdata`
   - [`files/etc/board.d/`](files/etc/board.d/) — Board setup: hostname, root password, timezone, WiFi SSID/key/country (loaded from U-Boot env, see [U-Boot Environment Variables](#u-boot-environment-variables))
   - [`files/etc/rc.local`](files/etc/rc.local) — Boot hook; the CPU-tuning scripts are present but commented out by default
   - [`files/etc/sysupgrade.conf`](files/etc/sysupgrade.conf) — Preserves `/etc/scripts/` across sysupgrades
@@ -182,6 +183,15 @@ Read by [`files/etc/uci-defaults/90_my_dhcp`](files/etc/uci-defaults/90_my_dhcp)
 | `dhcp_hostN_duid` | DHCPv6 DUID (optional) |
 
 A host slot is skipped entirely if `name`, `mac`, or `ip` is missing. All static leases are created with `leasetime='infinite'`.
+
+### Unbound local DNS records
+
+Read by [`files/etc/uci-defaults/91_my_unbound_localdata`](files/etc/uci-defaults/91_my_unbound_localdata), which appends `local-data:` records to [`unbound_srv.conf`](files/etc/unbound/unbound_srv.conf) at first boot:
+
+| Variable | Description |
+|---|---|
+| `unbound_private_domain` | Personal domain: used for `private-domain:` in `unbound_srv.conf`, and by [`90_my_unbound`](files/etc/uci-defaults/90_my_unbound) for `domain_insecure` and the Cloudflare DoT forward zone `wg.<domain>.` |
+| `unbound_localN` (N = 0…15) | One record per slot: `<fqdn> <ipv4> [<ipv6>]` — emits an `A` record and, if the third field is present, an `AAAA` record |
 
 ## Recovery
 

@@ -1,0 +1,93 @@
+#!/bin/sh
+
+# Skip if already configured
+[ "$(uci -q get unbound.ub_main.recursion)" = "aggressive" ] && exit 0
+
+[ -e /etc/config/unbound ] || touch /etc/config/unbound
+
+# Read the private domain from U-Boot env, fall back to a default
+PRIVATE_DOMAIN=$(fw_printenv -n unbound_private_domain 2>/dev/null)
+PRIVATE_DOMAIN=${PRIVATE_DOMAIN:-"example.com"}
+
+uci -q batch << EOI
+
+set unbound.ub_main=unbound
+set unbound.ub_main.enabled='1'
+set unbound.ub_main.add_extra_dns='0'
+set unbound.ub_main.dhcp_link='odhcpd'
+set unbound.ub_main.dhcp4_slaac6='1'
+set unbound.ub_main.add_wan_fqdn='1'
+set unbound.ub_main.add_local_fqdn='3'
+set unbound.ub_main.exclude_ipv6_ga='0'
+set unbound.ub_main.dns64='0'
+set unbound.ub_main.domain='lan'
+set unbound.ub_main.edns_size='1232'
+set unbound.ub_main.extended_stats='1'
+set unbound.ub_main.hide_binddata='1'
+set unbound.ub_main.interface_auto='1'
+set unbound.ub_main.listen_port='53'
+set unbound.ub_main.localservice='0'
+set unbound.ub_main.manual_conf='0'
+set unbound.ub_main.num_threads='4'
+set unbound.ub_main.protocol='mixed'
+set unbound.ub_main.rate_limit='0'
+set unbound.ub_main.rebind_localhost='0'
+set unbound.ub_main.rebind_protection='0'
+set unbound.ub_main.recursion='aggressive'
+set unbound.ub_main.resource='large'
+set unbound.ub_main.root_age='9'
+set unbound.ub_main.ttl_min='120'
+set unbound.ub_main.ttl_neg_max='1000'
+set unbound.ub_main.unbound_control='1'
+set unbound.ub_main.validator='1'
+set unbound.ub_main.verbosity='1'
+delete unbound.ub_main.iface_wan
+add_list unbound.ub_main.iface_wan='wan'
+add_list unbound.ub_main.iface_wan='wan6'
+delete unbound.ub_main.iface_lan
+add_list unbound.ub_main.iface_lan='lan'
+delete unbound.ub_main.iface_trig
+add_list unbound.ub_main.iface_trig='wan'
+add_list unbound.ub_main.iface_trig='wg0'
+delete unbound.ub_main.domain_insecure
+add_list unbound.ub_main.domain_insecure='$PRIVATE_DOMAIN'
+
+set unbound.auth_icann=zone
+set unbound.auth_icann.enabled='1'
+set unbound.auth_icann.fallback='1'
+set unbound.auth_icann.url_dir='https://www.internic.net/domain/'
+set unbound.auth_icann.zone_type='auth_zone'
+delete unbound.auth_icann.server
+add_list unbound.auth_icann.server='lax.xfr.dns.icann.org'
+add_list unbound.auth_icann.server='iad.xfr.dns.icann.org'
+delete unbound.auth_icann.zone_name
+add_list unbound.auth_icann.zone_name='.'
+add_list unbound.auth_icann.zone_name='arpa.'
+add_list unbound.auth_icann.zone_name='in-addr.arpa.'
+add_list unbound.auth_icann.zone_name='ip6.arpa.'
+
+set unbound.fwd_isp=zone
+set unbound.fwd_isp.enabled='0'
+
+set unbound.fwd_google=zone
+set unbound.fwd_google.enabled='0'
+
+set unbound.fwd_cloudflare=zone
+set unbound.fwd_cloudflare.enabled='1'
+set unbound.fwd_cloudflare.fallback='0'
+set unbound.fwd_cloudflare.tls_index='cloudflare-dns.com'
+set unbound.fwd_cloudflare.tls_upstream='1'
+set unbound.fwd_cloudflare.zone_type='forward_zone'
+set unbound.fwd_cloudflare.dns_assist='none'
+delete unbound.fwd_cloudflare.server
+add_list unbound.fwd_cloudflare.server='1.1.1.1'
+add_list unbound.fwd_cloudflare.server='1.0.0.1'
+add_list unbound.fwd_cloudflare.server='2606:4700:4700::1111'
+add_list unbound.fwd_cloudflare.server='2606:4700:4700::1001'
+delete unbound.fwd_cloudflare.zone_name
+add_list unbound.fwd_cloudflare.zone_name='wg.$PRIVATE_DOMAIN.'
+
+commit unbound
+EOI
+
+exit 0
