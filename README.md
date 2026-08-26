@@ -11,7 +11,7 @@
 - [`mt6000.config`](mt6000.config) — OpenWrt build configuration (`.config`)
 - [`build.sh`](build.sh) — Local build script (feeds → defconfig → download → make); runs inside the container from `shell.nix`
 - [`shell.nix`](shell.nix) — `nix-shell` environment that provides `podman` and helper functions to build inside a Debian container (see [Building](#building))
-- [`.github/workflows/build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) — GitHub Actions CI that reproduces the local build on `ubuntu-24.04-arm` and publishes to Releases + Pages
+- [`.github/workflows/build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) — GitHub Actions CI that reproduces the local build on `ubuntu-24.04` and publishes to Releases + Pages
 - [`files/`](files/) — Custom files overlaid on the root filesystem at build time
   - [`files/etc/uci-defaults/`](files/etc/uci-defaults/) — First-boot scripts that configure the router via UCI (see note below)
   - [`files/etc/scripts/`](files/etc/scripts/) — Runtime tuning and WiFi automation scripts (see [Scripts](#scripts))
@@ -54,7 +54,7 @@ This repo holds only the config and overlay (`mt6000.config` + `files/`). The bu
 
 ### CI (GitHub Actions)
 
-[`build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) runs on push, on a schedule, and manually. It detects the newest `next-*` branch upstream, checks out both repos, overlays `files/` and `mt6000.config` → `.config`, then builds on `ubuntu-24.04-arm` and publishes the firmware to GitHub Releases + Pages.
+[`build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) runs on push, on a schedule, and manually. It detects the newest `next-*` branch upstream, checks out both repos, overlays `files/` and `mt6000.config` → `.config`, then builds on `ubuntu-24.04` (x86_64 — arm64 can't bootstrap `golang-bootstrap`) and publishes the firmware to GitHub Releases + Pages.
 
 ### Local (nix-shell + podman)
 
