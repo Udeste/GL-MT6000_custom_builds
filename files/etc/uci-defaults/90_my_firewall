@@ -1,5 +1,7 @@
 #!/bin/sh
-exit 0
+
+# Skip if already configured (the 'wg' zone is created by this script)
+uci -q show firewall | grep -q "\.name='wg'" && exit 0
 
 # Check if a forwarding rule with given src→dest already exists
 has_forwarding() {

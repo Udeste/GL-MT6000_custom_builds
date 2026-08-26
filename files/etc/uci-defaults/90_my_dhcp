@@ -1,24 +1,7 @@
 #!/bin/sh
 
-exit 0
-
-# Read DHCP host credentials from U-Boot env, fall back to defaults
-HOST0_NAME=$(fw_printenv -n dhcp_host0_name 2>/dev/null)
-HOST0_MAC=$(fw_printenv -n dhcp_host0_mac 2>/dev/null)
-HOST0_DUID=$(fw_printenv -n dhcp_host0_duid 2>/dev/null)
-
-HOST1_NAME=$(fw_printenv -n dhcp_host1_name 2>/dev/null)
-HOST1_MAC=$(fw_printenv -n dhcp_host1_mac 2>/dev/null)
-HOST1_IP=$(fw_printenv -n dhcp_host1_ip 2>/dev/null)
-
-# Set defaults if any of the values are missing
-HOST0_NAME=${HOST0_NAME:-"missing-value-in-uboot"}
-HOST0_MAC=${HOST0_MAC:-"00:11:22:33:44:55"}
-HOST0_DUID=${HOST0_DUID:-"000000000000000000000000000000000000"}
-
-HOST1_NAME=${HOST1_NAME:-"missing-value-in-uboot"}
-HOST1_MAC=${HOST1_MAC:-"00:11:22:33:44:55"}
-HOST1_IP=${HOST1_IP:-"192.168.8.55"}
+# Skip if already configured
+[ "$(uci -q get dhcp.odhcpd.maindhcp)" = "1" ] && exit 0
 
 has_host() {
     local name="$1" i=0
@@ -27,6 +10,28 @@ has_host() {
         i=$((i + 1))
     done
     return 1
+}
+
+# Add a static host from U-Boot env (dhcp_hostN_name/_mac/_ip, optional _duid).
+# hostid is derived from the last octet of the IP. Skipped if name/mac/ip are
+# missing or a host with the same name already exists.
+add_host() {
+    local idx="$1" name mac ip duid hostid
+    name=$(fw_printenv -n "dhcp_host${idx}_name" 2>/dev/null)
+    mac=$(fw_printenv -n "dhcp_host${idx}_mac" 2>/dev/null)
+    ip=$(fw_printenv -n "dhcp_host${idx}_ip" 2>/dev/null)
+    duid=$(fw_printenv -n "dhcp_host${idx}_duid" 2>/dev/null)
+    [ -n "$name" ] && [ -n "$mac" ] && [ -n "$ip" ] || return 0
+    has_host "$name" && return 0
+    hostid=$(printf '%02d' "${ip##*.}")
+    uci -q add dhcp host
+    uci -q set dhcp.@host[-1].name="$name"
+    uci -q set dhcp.@host[-1].ip="$ip"
+    uci -q add_list dhcp.@host[-1].mac="$mac"
+    uci -q set dhcp.@host[-1].hostid="$hostid"
+    uci -q set dhcp.@host[-1].leasetime='infinite'
+    [ -n "$duid" ] && uci -q add_list dhcp.@host[-1].duid="$duid"
+    return 0
 }
 
 # Configure LAN DHCP (odhcpd)
@@ -49,8 +54,6 @@ uci -q del dhcp.lan.dns
 uci add_list dhcp.lan.dns='fd08::1'
 uci set dhcp.lan.ra_preference='medium'
 uci set dhcp.lan.ipv6_only_preferred='0'
-uci set dhcp.lan.ra_slaac='0'
-uci set dhcp.lan.dhcpv6_pd_preferred='1'
 uci set dhcp.lan.dhcpv6_pd='1'
 
 # Ignore WAN DHCP server role
@@ -67,24 +70,10 @@ uci set dhcp.odhcpd.loglevel='4'
 uci set dhcp.odhcpd.piodir='/tmp/odhcpd-piodir'
 uci set dhcp.odhcpd.hostsdir='/tmp/hosts'
 
-# Add static host: HOST0 (credentials from U-Boot env)
-has_host "$HOST0_NAME" || {
-    uci -q add dhcp host
-    uci -q set dhcp.@host[-1].name="$HOST0_NAME"
-    uci -q set dhcp.@host[-1].ip='192.168.8.5'
-    uci -q add_list dhcp.@host[-1].mac="$HOST0_MAC"
-    uci -q set dhcp.@host[-1].duid="$HOST0_DUID"
-    uci -q set dhcp.@host[-1].hostid='05'
-}
-
-# Add static host: HOST1 (credentials from U-Boot env)
-has_host "$HOST1_NAME" || {
-    uci -q add dhcp host
-    uci -q set dhcp.@host[-1].name="$HOST1_NAME"
-    uci -q set dhcp.@host[-1].ip="$HOST1_IP"
-    uci -q add_list dhcp.@host[-1].mac="$HOST1_MAC"
-    uci -q set dhcp.@host[-1].hostid='55'
-}
+# Static hosts from U-Boot env
+for i in 0 1 2 3 4 5 6; do
+    add_host "$i"
+done
 
 uci commit dhcp
 exit 0

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-exit 0
+# Skip if already configured
+[ "$(uci -q get advanced.@defaults[0].usb_2)" = "0" ] && exit 0
 
 # Ensure singleton sections exist
 uci -q get advanced.@defaults[0] >/dev/null 2>&1         || uci -q add advanced defaults
@@ -10,12 +11,19 @@ uci -q get advanced.@advanced_packet_steering[0] >/dev/null 2>&1 || uci -q add a
 uci -q batch << EOI
 set advanced.@defaults[0].usb_2='0'
 set advanced.@defaults[0].usb_power='0'
-set advanced.@defaults[0].atf_enable='1'
-set advanced.@defaults[0].hw_atf_enable='1'
-set advanced.@defaults[0].wed_offloading='1'
+set advanced.@defaults[0].atf_enable='0'
+set advanced.@defaults[0].wed_offloading='0'
+set advanced.@defaults[0].cake_ifb_tx_queues_mode='half'
+
+set advanced.@edcca[0].compensation='-6'
+set advanced.@edcca[0].thres_0='-60'
+set advanced.@edcca[0].thres_1='-62'
+set advanced.@edcca[0].thres_2='-59'
+set advanced.@edcca[0].thres_3='-54'
+set advanced.@edcca[0].edcca_enable='1'
+set advanced.@edcca[0].profile='stable'
 
 set advanced.@advanced_packet_steering[0].advanced_packet_steering_enable='2'
-set advanced.@advanced_packet_steering[0].advanced_packet_steering_delay='30'
 
 commit advanced
 EOI

@@ -12,7 +12,7 @@ WIFI_COUNTRY=${WIFI_COUNTRY:-"NL"}
 
 board_config_update
 
-ucidef_set_wireless all "$WIFI_SSID" sae "$WIFI_KEY"
+ucidef_set_wireless all "$WIFI_SSID" sae-mixed "$WIFI_KEY"
 ucidef_set_country "$WIFI_COUNTRY"
 
 board_config_flush

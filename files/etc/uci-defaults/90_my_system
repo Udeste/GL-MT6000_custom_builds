@@ -1,7 +1,5 @@
 #!/bin/sh
 
-exit 0
-
 has_led() {
     local sysfs="$1" i=0
     while uci -q get "system.@led[$i]" >/dev/null 2>&1; do
@@ -10,6 +8,9 @@ has_led() {
     done
     return 1
 }
+
+# Skip if already configured
+has_led 'blue:run' && has_led 'white:system' && exit 0
 
 # LED: blue:run — only if not already configured
 has_led 'blue:run' || {

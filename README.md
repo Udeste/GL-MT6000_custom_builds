@@ -12,29 +12,26 @@
 - [`build.sh`](build.sh) — Local build script (feeds → defconfig → download → make); runs inside the container from `shell.nix`
 - [`shell.nix`](shell.nix) — `nix-shell` environment that provides `podman` and helper functions to build inside a Debian container (see [Building](#building))
 - [`.github/workflows/build-openwrt.yaml`](.github/workflows/build-openwrt.yaml) — GitHub Actions CI that reproduces the local build on `ubuntu-24.04-arm` and publishes to Releases + Pages
-- [`download_qosmate.sh`](download_qosmate.sh) — Build-host helper that fetches [QoSmate](https://github.com/hudra0/qosmate) (SQM/CAKE) and, optionally, its LuCI app into `files/` so they are baked into the image
 - [`files/`](files/) — Custom files overlaid on the root filesystem at build time
   - [`files/etc/uci-defaults/`](files/etc/uci-defaults/) — First-boot scripts that configure the router via UCI (see note below)
-  - [`files/etc/config/qosmate`](files/etc/config/qosmate) — QoSmate config (CAKE on `eth1`, 240/25 Mbit down/up)
   - [`files/etc/scripts/`](files/etc/scripts/) — Runtime tuning and WiFi automation scripts (see [Scripts](#scripts))
   - [`files/etc/crontabs/root`](files/etc/crontabs/root) — Scheduled jobs (see [Cron jobs](#cron-jobs))
   - [`files/etc/hotplug.d/iface/30-unbound-cache`](files/etc/hotplug.d/iface/30-unbound-cache) — Dumps/restores the unbound DNS cache across WAN up/down events
-  - [`files/etc/board.d/`](files/etc/board.d/) — Board setup: hostname, root password, timezone (loaded from U-Boot env via `fw_loadenv`)
+  - [`files/etc/board.d/`](files/etc/board.d/) — Board setup: hostname, root password, timezone, WiFi SSID/key/country (loaded from U-Boot env, see [U-Boot Environment Variables](#u-boot-environment-variables))
   - [`files/etc/rc.local`](files/etc/rc.local) — Boot hook; the CPU-tuning scripts are present but commented out by default
   - [`files/etc/sysupgrade.conf`](files/etc/sysupgrade.conf) — Preserves `/etc/scripts/` across sysupgrades
   - [`files/etc/fw_env.config`](files/etc/fw_env.config) — Points `fw_printenv`/`fw_setenv` at the U-Boot env partition
   - [`files/etc/dropbear/`](files/etc/dropbear/) — SSH `authorized_keys` and host keys
 
-> **Note:** Most `uci-defaults` scripts currently start with an early `exit 0`, so they are effectively disabled — `90_my_ddns` is the only one that runs. Remove the early `exit 0` to re-enable a script before building.
+> **Note:** Each `uci-defaults` script starts with an idempotence guard: it checks whether the configuration it manages is already present and exits early if so. Settings are applied on genuine first boot only and never clobber an existing (possibly hand-tuned) config — including when the scripts re-run after a sysupgrade that restored the config backup.
 
 ## Differences from pesa1234's Build
 
 **Added:**
 - WiFi UCODE scripts for faster boot
-- WireGuard VPN server (port 51545) with up to 6 peers
+- WireGuard VPN server (port 51545) with up to 7 peers
 - Cloudflare DDNS
 - **unbound** recursive DNS resolver (`unbound-daemon`, `luci-app-unbound`) with cache persistence across WAN drops
-- **QoSmate** (CAKE-based SQM) — pulled into the image via [`download_qosmate.sh`](download_qosmate.sh)
 - ACME / Let's Encrypt (`acme`, `acme-acmesh`, `acme-acmesh-dnsapi`)
 - Avahi (mDNS)
 - `collectd` + `luci-app-statistics` for monitoring (CPU, RAM, network, thermals, etc.)
@@ -113,7 +110,7 @@ Defined in [`files/etc/crontabs/root`](files/etc/crontabs/root):
 
 ## U-Boot Environment Variables
 
-Secrets and device-specific values are stored in U-Boot environment — a region of flash that survives firmware upgrades. The first-boot scripts read these variables and fall back to safe defaults if missing.
+Secrets and device-specific values are stored in the U-Boot environment — a region of flash that survives firmware upgrades. The board-setup and first-boot scripts read these variables and fall back to safe defaults if missing. [`files/etc/fw_env.config`](files/etc/fw_env.config) points `fw_printenv`/`fw_setenv` at the env partition (`/dev/mmcblk0p1`, offset `0x0`, size `0x80000`).
 
 Set variables over SSH with `fw_setenv`:
 
@@ -121,15 +118,28 @@ Set variables over SSH with `fw_setenv`:
 fw_setenv <variable> "<value>"
 ```
 
+### System
+
+Read by [`files/etc/board.d/90_system`](files/etc/board.d/90_system) (via `fw_loadenv` → `/var/run/uboot-env/`):
+
+| Variable | Description | Fallback if unset |
+|---|---|---|
+| `root_password_hash` | Root password hash, crypt format as in `/etc/shadow` | no root password set |
+| `timezone` | System timezone (e.g. `CET-1CEST,M3.5.0,M10.5.0/3`) | OpenWrt default (`UTC`) |
+
 ### WiFi
 
-| Variable | Description |
-|---|---|
-| `wifi_ssid` | WiFi network name |
-| `wifi_key` | WiFi password |
-| `wifi_country` | Country code (e.g. `NL`) |
+Read by [`files/etc/board.d/90_wireless`](files/etc/board.d/90_wireless):
+
+| Variable | Description | Fallback if unset |
+|---|---|---|
+| `wifi_ssid` | WiFi network name | `GL-MT6000` |
+| `wifi_key` | WiFi password (WPA2/WPA3 mixed, `sae-mixed`) | `changeme123` |
+| `wifi_country` | Country code | `NL` |
 
 ### DDNS (Cloudflare)
+
+Read by [`files/etc/uci-defaults/90_my_ddns`](files/etc/uci-defaults/90_my_ddns):
 
 | Variable | Description |
 |---|---|
@@ -139,21 +149,39 @@ fw_setenv <variable> "<value>"
 
 ### WireGuard
 
+Read by [`files/etc/uci-defaults/90_my_wireguard`](files/etc/uci-defaults/90_my_wireguard) (skipped if `network.wg0` already exists):
+
 | Variable | Description |
 |---|---|
 | `wg0_priv_key` | Server private key |
-| `wg0_peer1_priv_key` / `wg0_peer1_pub_key` | Peer 1 (Pixel) keys |
-| `wg0_peer2_priv_key` / `wg0_peer2_pub_key` | Peer 2 (Lenovo) keys |
-| `wg0_peer3_priv_key` / `wg0_peer3_pub_key` | Peer 3 (OP) keys |
-| `wg0_peer4_priv_key` / `wg0_peer4_pub_key` | Peer 4 (ROG) keys |
-| `wg0_peer5_priv_key` / `wg0_peer5_pub_key` | Peer 5 (MF286D) keys |
-| `wg0_peer6_priv_key` / `wg0_peer6_pub_key` | Peer 6 (WD3600) keys |
+| `wg0_peer1_priv_key` / `wg0_peer1_pub_key` / `wg0_peer1_desc` | Peer 1 keys and description (fallback `Peer1`) |
+| `wg0_peer2_priv_key` / `wg0_peer2_pub_key` / `wg0_peer2_desc` | Peer 2 keys and description (fallback `Peer2`) |
+| `wg0_peer3_priv_key` / `wg0_peer3_pub_key` / `wg0_peer3_desc` | Peer 3 keys and description (fallback `Peer3`) |
+| `wg0_peer4_priv_key` / `wg0_peer4_pub_key` / `wg0_peer4_desc` | Peer 4 keys and description (fallback `Peer4`) |
+| `wg0_peer5_priv_key` / `wg0_peer5_pub_key` / `wg0_peer5_desc` | Peer 5 keys and description (fallback `Peer5`) |
+| `wg0_peer6_priv_key` / `wg0_peer6_pub_key` / `wg0_peer6_desc` | Peer 6 keys and description (fallback `Peer6`) |
+| `wg0_peer7_priv_key` / `wg0_peer7_pub_key` / `wg0_peer7_desc` | Peer 7 keys and description (fallback `Peer7`) |
 
 ### Network
 
+Read by [`files/etc/uci-defaults/90_my_network`](files/etc/uci-defaults/90_my_network):
+
 | Variable | Description |
 |---|---|
-| `dhcp_default_duid` | DHCP DUID for WAN |
+| `dhcp_default_duid` | Default DHCPv6 DUID (`network.globals.dhcp_default_duid`) |
+
+### Static DHCP hosts
+
+Read by [`files/etc/uci-defaults/90_my_dhcp`](files/etc/uci-defaults/90_my_dhcp). Up to 7 static leases (`N` = 0…6), each defined by:
+
+| Variable | Description |
+|---|---|
+| `dhcp_hostN_name` | Hostname (required) |
+| `dhcp_hostN_mac` | MAC address (required) |
+| `dhcp_hostN_ip` | Static IPv4 address (required; the IPv6 `hostid` is derived from its last octet) |
+| `dhcp_hostN_duid` | DHCPv6 DUID (optional) |
+
+A host slot is skipped entirely if `name`, `mac`, or `ip` is missing. All static leases are created with `leasetime='infinite'`.
 
 ## Recovery
 

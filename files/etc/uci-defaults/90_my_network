@@ -1,6 +1,7 @@
 #!/bin/sh
 
-exit 0
+# Skip if already configured
+[ "$(uci -q get network.globals.ula_prefix)" = "fd08::/48" ] && exit 0
 
 DHCP_DEFAULT_DUID=$(fw_printenv -n dhcp_default_duid 2>/dev/null)
 

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-exit 0
+# Skip if already configured
+[ "$(uci -q get luci_statistics.collectd_thermal.enable)" = "1" ] && exit 0
 
 uci -q batch <<-EOI
 

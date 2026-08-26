@@ -1,7 +1,6 @@
 #!/bin/sh
 
-exit 0
-
+# Skip if already configured
 uci -q get network.wg0 >/dev/null 2>&1 && exit 0
 
 WG0_PRIV_KEY=$(fw_printenv -n wg0_priv_key 2>/dev/null)
@@ -17,6 +16,16 @@ WG0_PEER5_PRIV_KEY=$(fw_printenv -n wg0_peer5_priv_key 2>/dev/null)
 WG0_PEER5_PUB_KEY=$(fw_printenv -n wg0_peer5_pub_key 2>/dev/null)
 WG0_PEER6_PRIV_KEY=$(fw_printenv -n wg0_peer6_priv_key 2>/dev/null)
 WG0_PEER6_PUB_KEY=$(fw_printenv -n wg0_peer6_pub_key 2>/dev/null)
+WG0_PEER7_PRIV_KEY=$(fw_printenv -n wg0_peer7_priv_key 2>/dev/null)
+WG0_PEER7_PUB_KEY=$(fw_printenv -n wg0_peer7_pub_key 2>/dev/null)
+
+WG0_PEER1_DESC=$(fw_printenv -n wg0_peer1_desc 2>/dev/null)
+WG0_PEER2_DESC=$(fw_printenv -n wg0_peer2_desc 2>/dev/null)
+WG0_PEER3_DESC=$(fw_printenv -n wg0_peer3_desc 2>/dev/null)
+WG0_PEER4_DESC=$(fw_printenv -n wg0_peer4_desc 2>/dev/null)
+WG0_PEER5_DESC=$(fw_printenv -n wg0_peer5_desc 2>/dev/null)
+WG0_PEER6_DESC=$(fw_printenv -n wg0_peer6_desc 2>/dev/null)
+WG0_PEER7_DESC=$(fw_printenv -n wg0_peer7_desc 2>/dev/null)
 
 # Set defaults if any of the values are missing
 WG0_PRIV_KEY=${WG0_PRIV_KEY:-"missing-value-in-uboot"}
@@ -32,6 +41,16 @@ WG0_PEER5_PRIV_KEY=${WG0_PEER5_PRIV_KEY:-"missing-value-in-uboot"}
 WG0_PEER5_PUB_KEY=${WG0_PEER5_PUB_KEY:-"missing-value-in-uboot"}
 WG0_PEER6_PRIV_KEY=${WG0_PEER6_PRIV_KEY:-"missing-value-in-uboot"}
 WG0_PEER6_PUB_KEY=${WG0_PEER6_PUB_KEY:-"missing-value-in-uboot"}
+WG0_PEER7_PRIV_KEY=${WG0_PEER7_PRIV_KEY:-"missing-value-in-uboot"}
+WG0_PEER7_PUB_KEY=${WG0_PEER7_PUB_KEY:-"missing-value-in-uboot"}
+
+WG0_PEER1_DESC=${WG0_PEER1_DESC:-"Peer1"}
+WG0_PEER2_DESC=${WG0_PEER2_DESC:-"Peer2"}
+WG0_PEER3_DESC=${WG0_PEER3_DESC:-"Peer3"}
+WG0_PEER4_DESC=${WG0_PEER4_DESC:-"Peer4"}
+WG0_PEER5_DESC=${WG0_PEER5_DESC:-"Peer5"}
+WG0_PEER6_DESC=${WG0_PEER6_DESC:-"Peer6"}
+WG0_PEER7_DESC=${WG0_PEER7_DESC:-"Peer7"}
 
 uci -q batch << EOI
 
@@ -44,44 +63,54 @@ add_list network.wg0.addresses='172.16.0.1/24'
 add_list network.wg0.addresses='fd99::1/120'
 
 add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='Pixel'
+set network.@wireguard_wg0[-1].description='$WG0_PEER1_DESC'
 set network.@wireguard_wg0[-1].public_key='$WG0_PEER1_PUB_KEY'
 set network.@wireguard_wg0[-1].private_key='$WG0_PEER1_PRIV_KEY'
 add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.60/32'
 add_list network.@wireguard_wg0[-1].allowed_ips='fd99::60/128'
 
 add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='Lenovo'
+set network.@wireguard_wg0[-1].description='$WG0_PEER2_DESC'
 set network.@wireguard_wg0[-1].public_key='$WG0_PEER2_PUB_KEY'
 set network.@wireguard_wg0[-1].private_key='$WG0_PEER2_PRIV_KEY'
 add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.70/32'
 add_list network.@wireguard_wg0[-1].allowed_ips='fd99::70/128'
 
 add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='OP'
+set network.@wireguard_wg0[-1].description='$WG0_PEER3_DESC'
 set network.@wireguard_wg0[-1].public_key='$WG0_PEER3_PUB_KEY'
 set network.@wireguard_wg0[-1].private_key='$WG0_PEER3_PRIV_KEY'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.75/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::75/128'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='$WG0_PEER4_DESC'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER4_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER4_PRIV_KEY'
 add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.80/32'
 add_list network.@wireguard_wg0[-1].allowed_ips='fd99::80/128'
 
 add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='ROG'
-set network.@wireguard_wg0[-1].public_key='$WG0_PEER4_PUB_KEY'
-set network.@wireguard_wg0[-1].private_key='$WG0_PEER4_PRIV_KEY'
+set network.@wireguard_wg0[-1].description='$WG0_PEER5_DESC'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER5_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER5_PRIV_KEY'
 add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.90/32'
 add_list network.@wireguard_wg0[-1].allowed_ips='fd99::90/128'
 
 add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='MF286D'
-set network.@wireguard_wg0[-1].public_key='$WG0_PEER5_PUB_KEY'
-set network.@wireguard_wg0[-1].private_key='$WG0_PEER5_PRIV_KEY'
-add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.105/32'
-add_list network.@wireguard_wg0[-1].allowed_ips='fd99::105/128'
-
-add network wireguard_wg0
-set network.@wireguard_wg0[-1].description='WD3600'
+set network.@wireguard_wg0[-1].description='$WG0_PEER6_DESC'
 set network.@wireguard_wg0[-1].public_key='$WG0_PEER6_PUB_KEY'
 set network.@wireguard_wg0[-1].private_key='$WG0_PEER6_PRIV_KEY'
+set network.@wireguard_wg0[-1].route_allowed_ips='1'
+add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.105/32'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd99::105/128'
+add_list network.@wireguard_wg0[-1].allowed_ips='192.168.5.0/24'
+add_list network.@wireguard_wg0[-1].allowed_ips='fd05::/48'
+
+add network wireguard_wg0
+set network.@wireguard_wg0[-1].description='$WG0_PEER7_DESC'
+set network.@wireguard_wg0[-1].public_key='$WG0_PEER7_PUB_KEY'
+set network.@wireguard_wg0[-1].private_key='$WG0_PEER7_PRIV_KEY'
 add_list network.@wireguard_wg0[-1].allowed_ips='172.16.0.110/32'
 add_list network.@wireguard_wg0[-1].allowed_ips='fd99::110/128'
 
