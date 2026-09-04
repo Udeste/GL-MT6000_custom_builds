@@ -1,0 +1,1920 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:d125661f-a8c9-4205-8c4c-39a457b55f24",
+  "version": "1",
+  "metadata": {
+    "timestamp": "2026-09-01T08:38:58Z"
+  },
+  "components": [
+    {
+      "name": "base-files",
+      "version": "1~8363a9c",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "comgt",
+      "version": "0.32-r36",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0+"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dropbear",
+      "version": "2026.94-r1",
+      "cpe": "cpe:/a:dropbear_ssh_project:dropbear_ssh",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fitblk",
+      "version": "2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fstools",
+      "version": "2026.07.25~2aa16407-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fwtool",
+      "version": "2025.10.03~04cd252e-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ip6tables-nft",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iptables-mod-conntrack-extra",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iptables-mod-ipopt",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iptables-nft",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kernel",
+      "version": "6.18.44~e2055894051010ee3e51fb1ff4f64132-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-asn1-decoder",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-br-netfilter",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-cfg80211",
+      "version": "6.18.44.7.2-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-acompress",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-aead",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-authenc",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-blake2b",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-ccm",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-cmac",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-crc32",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-crc32c",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-ctr",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-des",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-ecb",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-gcm",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-geniv",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-gf128",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-ghash",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-hash",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-hmac",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-hw-safexcel",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-kpp",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-lib-chacha20",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-lib-chacha20poly1305",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-lib-curve25519",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-lib-poly1305",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-manager",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-md5",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-null",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-rng",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-seqiv",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-sha1",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-sha256",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-sha3",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-sha512",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-crypto-xxhash",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-cryptodev",
+      "version": "6.18.44.1.14-r2",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-btrfs",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-exfat",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-ext4",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-f2fs",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-ksmbd",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-netfs",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-ntfs3",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-smbfs-common",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-fs-vfat",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-gpio-button-hotplug",
+      "version": "6.18.44-r6",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-hwmon-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-i2c-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ifb",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ip6tables",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-conntrack",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-conntrack-extra",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-extra",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-ipopt",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-ipset",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ipt-offload",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-iptables",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-leds-gpio",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-crc-ccitt",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-crc16",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-lzo",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-raid6",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-xor",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-xxhash",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-zlib-deflate",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-zlib-inflate",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-lib-zstd",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-mac80211",
+      "version": "6.18.44.7.2-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-mt76-connac",
+      "version": "6.18.44.2026.07.01~59676919-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause-Clear"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-mt76-core",
+      "version": "6.18.44.2026.07.01~59676919-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause-Clear"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-mt7915e",
+      "version": "6.18.44.2026.07.01~59676919-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause-Clear"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-mt7986-firmware",
+      "version": "6.18.44.2026.07.01~59676919-r1",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause-Clear"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-netlink-diag",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-conncount",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-conntrack",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-conntrack-netlink",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-flow",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-ipt",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-ipt6",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-log",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-log6",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-nat",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-reject",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nf-reject6",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nfnetlink",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nft-compat",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nft-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nft-fib",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nft-nat",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nft-offload",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nls-base",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nls-cp437",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nls-iso8859-1",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nls-ucs2-utils",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-nls-utf8",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-oid-registry",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-phy-mtk-tphy",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-ppp",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-pppoe",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-pppox",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-act-vlan",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-bpf",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-cake",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-connmark",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-sched-flower",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-scsi-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-slhc",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-tcp-bbr",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-thermal",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-tun",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-udptunnel4",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-udptunnel6",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-common",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-core",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-storage",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-storage-extras",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-storage-uas",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-xhci-hcd",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb-xhci-mtk",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-usb3",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kmod-wireguard",
+      "version": "6.18.44-r1",
+      "cpe": "cpe:/o:linux:linux_kernel",
+      "type": "operating-system",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libatomic1",
+      "version": "14.4.0-r5",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-with-GCC-exception"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libc",
+      "version": "1.2.6-r5",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-with-GCC-exception"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgcc1",
+      "version": "14.4.0-r5",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-with-GCC-exception"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libiptext-nft0",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libiptext0",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libiptext6-0",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libpthread",
+      "version": "1.2.6-r5",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-with-GCC-exception"
+          }
+        }
+      ]
+    },
+    {
+      "name": "librt",
+      "version": "1.2.6-r5",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-with-GCC-exception"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libxtables12",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mtd",
+      "version": "28",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0+"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ubi-utils",
+      "version": "2.3.1-r1",
+      "cpe": "cpe:/a:mtd-utils_project:mtd-utils",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPLv2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "uboot-envtools",
+      "version": "2026.07-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0+"
+          }
+        }
+      ]
+    },
+    {
+      "name": "xtables-nft",
+      "version": "1.8.10-r3",
+      "cpe": "cpe:/a:netfilter:iptables",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    }
+  ]
+}
