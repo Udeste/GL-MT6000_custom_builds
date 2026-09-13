@@ -173,7 +173,7 @@ Read by [`files/etc/uci-defaults/90_my_network`](files/etc/uci-defaults/90_my_ne
 
 ### Static DHCP hosts
 
-Read by [`files/etc/uci-defaults/90_my_dhcp`](files/etc/uci-defaults/90_my_dhcp). Up to 7 static leases (`N` = 0…6), each defined by:
+Read by [`files/etc/uci-defaults/90_my_dhcp`](files/etc/uci-defaults/90_my_dhcp). Up to 9 static leases (`N` = 0…8), each defined by:
 
 | Variable | Description |
 |---|---|
