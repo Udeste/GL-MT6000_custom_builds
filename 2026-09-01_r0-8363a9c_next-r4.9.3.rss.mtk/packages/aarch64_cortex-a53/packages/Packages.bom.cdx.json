@@ -1,0 +1,1498 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:daf93690-d47f-41bd-b563-572640c72e0d",
+  "version": "1",
+  "metadata": {
+    "timestamp": "2026-09-01T08:38:58Z"
+  },
+  "components": [
+    {
+      "name": "acme-acmesh",
+      "version": "3.1.3-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "acme-acmesh-dnsapi",
+      "version": "3.1.3-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "acme-common",
+      "version": "1.5.3",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "attendedsysupgrade-common",
+      "version": "10",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "attr",
+      "version": "2.5.2-r3",
+      "cpe": "cpe:/a:attr_project:attr",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "avahi-dbus-daemon",
+      "version": "0.9_rc5-r1",
+      "cpe": "cpe:/a:avahi:avahi",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "btrfs-progs",
+      "version": "6.11-r4",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cgi-io",
+      "version": "2026.07.21~31cb3c89-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-contextswitch",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-cpu",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-ethstat",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-exec",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-interface",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-iwinfo",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-load",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-memory",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-network",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-rrdtool",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-thermal",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "collectd-mod-wireless",
+      "version": "5.12.0-r57",
+      "cpe": "cpe:/a:collectd:collectd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "coreutils",
+      "version": "9.11-r1",
+      "cpe": "cpe:/a:gnu:coreutils",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "coreutils-sleep",
+      "version": "9.11-r1",
+      "cpe": "cpe:/a:gnu:coreutils",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "coreutils-sort",
+      "version": "9.11-r1",
+      "cpe": "cpe:/a:gnu:coreutils",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "curl",
+      "version": "8.21.0-r1",
+      "cpe": "cpe:/a:haxx:libcurl",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dbus",
+      "version": "1.16.2-r4",
+      "cpe": "cpe:/a:freedesktop:dbus",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "AFL-2.1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ddns-scripts",
+      "version": "2.8.4-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ddns-scripts-cloudflare",
+      "version": "2.8.4-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ddns-scripts-services",
+      "version": "2.8.4-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "drill",
+      "version": "1.9.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:ldns",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "gawk",
+      "version": "5.4.1-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getdns",
+      "version": "1.7.3-r2",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "git",
+      "version": "2.50.1-r1",
+      "cpe": "cpe:/a:git-scm:git",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2-core",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2-gio",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2-gmodule",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2-gobject",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "glib2-gthread",
+      "version": "2.88.1-r1",
+      "cpe": "cpe:/a:gnome:glib",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "htop",
+      "version": "3.5.1-r1",
+      "cpe": "cpe:/a:htop:htop",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iperf3",
+      "version": "3.21-r2",
+      "cpe": "cpe:/a:es:iperf3",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "irqbalance",
+      "version": "1.9.5-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "jq",
+      "version": "1.8.2-r1",
+      "cpe": "cpe:/a:jqlang:jq",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libassuan",
+      "version": "3.0.2-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libattr",
+      "version": "2.5.2-r3",
+      "cpe": "cpe:/a:attr_project:attr",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libavahi-client",
+      "version": "0.9_rc5-r1",
+      "cpe": "cpe:/a:avahi:avahi",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libavahi-dbus-support",
+      "version": "0.9_rc5-r1",
+      "cpe": "cpe:/a:avahi:avahi",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libcurl4",
+      "version": "8.21.0-r1",
+      "cpe": "cpe:/a:haxx:libcurl",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libdaemon",
+      "version": "0.14-r5",
+      "cpe": "cpe:/a:libdaemon_project:libdaemon",
+      "type": "library"
+    },
+    {
+      "name": "libdbus",
+      "version": "1.16.2-r4",
+      "cpe": "cpe:/a:freedesktop:dbus",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "AFL-2.1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libevdev",
+      "version": "1.13.6-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libexif",
+      "version": "0.6.26-r1",
+      "cpe": "cpe:/a:libexif_project:libexif",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libexpat",
+      "version": "2.8.2-r1",
+      "cpe": "cpe:/a:libexpat_project:libexpat",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libffi",
+      "version": "3.4.7-r1",
+      "cpe": "cpe:/a:libffi_project:libffi",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libffmpeg-audio-dec",
+      "version": "6.1.4-r2",
+      "cpe": "cpe:/a:ffmpeg:ffmpeg",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "LGPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libflac",
+      "version": "1.4.3-r2",
+      "cpe": "cpe:/a:flac_project:flac",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        },
+        {
+          "license": {
+            "name": "GFDL-1.3-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgcrypt",
+      "version": "1.12.2-r1",
+      "cpe": "cpe:/a:gnupg:libgcrypt",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgd",
+      "version": "2.3.3-r1",
+      "cpe": "cpe:/a:libgd:libgd",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgnutls",
+      "version": "3.8.10-r1",
+      "cpe": "cpe:/a:gnu:gnutls",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgpg-error",
+      "version": "1.61-r1",
+      "cpe": "cpe:/a:gnupg:libgpg-error",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libgpgme",
+      "version": "2.1.2-r1",
+      "cpe": "cpe:/a:gnu:gpgme",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libid3tag",
+      "version": "0.16.3-r3",
+      "cpe": "cpe:/a:media-libs:libid3tag",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libiperf3",
+      "version": "3.21-r2",
+      "cpe": "cpe:/a:es:iperf3",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libjpeg-turbo",
+      "version": "3.1.1-r2",
+      "cpe": "cpe:/a:libjpeg-turbo:libjpeg-turbo",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        },
+        {
+          "license": {
+            "name": "IJG"
+          }
+        },
+        {
+          "license": {
+            "name": "MIT"
+          }
+        },
+        {
+          "license": {
+            "name": "Zlib"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libldns",
+      "version": "1.9.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:ldns",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "liblzo2",
+      "version": "2.10-r5",
+      "cpe": "cpe:/a:oberhumer:lzo",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libminiupnpc",
+      "version": "2.3.3-r1",
+      "cpe": "cpe:/a:miniupnp_project:miniupnpc",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libnatpmp1",
+      "version": "20230423-r2",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libnghttp2-14",
+      "version": "1.70.0-r1",
+      "cpe": "cpe:/a:nghttp2:nghttp2",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libogg0",
+      "version": "1.3.5-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libpng",
+      "version": "1.6.50-r1",
+      "cpe": "cpe:/a:libpng:libpng",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "Libpng"
+          }
+        },
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "librrd1",
+      "version": "1.0.50-r7",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libseccomp",
+      "version": "2.5.5-r1",
+      "cpe": "cpe:/a:libseccomp_project:libseccomp",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libsensors5",
+      "version": "3.6.2-r6",
+      "cpe": "cpe:/a:lm_sensors:lm_sensors",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libsqlite3-0",
+      "version": "3.53.4-r1",
+      "cpe": "cpe:/a:sqlite:sqlite",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "blessing"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libtasn1",
+      "version": "4.19.0-r2",
+      "cpe": "cpe:/a:gnu:libtasn1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libtirpc",
+      "version": "1.3.7-r2",
+      "cpe": "cpe:/a:libtirpc_project:libtirpc",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libudev-zero",
+      "version": "1.0.5-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "ISC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libunbound",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "liburing",
+      "version": "2.14-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libuv1",
+      "version": "1.48.0-r1",
+      "cpe": "cpe:/a:libuv:libuv",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libvorbis",
+      "version": "1.3.7-r3",
+      "cpe": "cpe:/a:xiph.org:libvorbis",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libwebp",
+      "version": "1.6.0-r1",
+      "cpe": "cpe:/a:webmproject:libwebp",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libwebsockets-full",
+      "version": "4.5.8-r1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libyaml",
+      "version": "0.2.5-r2",
+      "cpe": "cpe:/a:pyyaml_project:pyyaml",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mtkhnat_util",
+      "version": "1.5",
+      "type": "application"
+    },
+    {
+      "name": "mwan3",
+      "version": "2.12.2-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "nlbwmon",
+      "version": "2025.06.02~29236be6-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "ISC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pbr",
+      "version": "1.2.3-r93",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "AGPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rrdtool1",
+      "version": "1.0.50-r7",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "socat",
+      "version": "1.8.1.1-r1",
+      "cpe": "cpe:/a:dest-unreach:socat",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        },
+        {
+          "license": {
+            "name": "OpenSSL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sqm-scripts",
+      "version": "1.8.0-r2",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stubby",
+      "version": "0.4.3-r3",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ttyd",
+      "version": "1.7.7-r1",
+      "cpe": "cpe:/a:ttyd_project:ttyd",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unbound-anchor",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unbound-checkconf",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unbound-control",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unbound-control-setup",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unbound-daemon",
+      "version": "1.25.2-r1",
+      "cpe": "cpe:/a:nlnetlabs:unbound",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "name": "usbids",
+      "version": "0.410-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "usbutils",
+      "version": "019-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "usteer",
+      "version": "2026.05.19~7532e125-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "vnstat2",
+      "version": "2.13-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "vnstati2",
+      "version": "2.13-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wget-ssl",
+      "version": "1.25.0-r5",
+      "cpe": "cpe:/a:gnu:wget",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "which",
+      "version": "2.23-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-2.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wsdd2",
+      "version": "1.9.1-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "GPL-3.0-only"
+          }
+        }
+      ]
+    },
+    {
+      "name": "zoneinfo-core",
+      "version": "2026c-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "Unlicense"
+          }
+        }
+      ]
+    },
+    {
+      "name": "zoneinfo-simple",
+      "version": "2026c-r1",
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "name": "Unlicense"
+          }
+        }
+      ]
+    }
+  ]
+}
